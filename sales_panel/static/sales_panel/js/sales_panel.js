@@ -1,0 +1,1 @@
+list_products = document.querySelector('list_products')

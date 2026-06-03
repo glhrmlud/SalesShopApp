@@ -1,0 +1,16 @@
+# Ignorar o ambiente virtual
+venv/
+ENV/
+env/
+
+# Ignorar o banco de dados SQLite local
+*.sqlite3
+
+# Ignorar cache do Python compilado
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar arquivos do PyCharm
+.idea/

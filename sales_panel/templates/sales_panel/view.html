@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'sales_panel/css/view.css' %}">
+</head>
+
+<body>
+  <div class="view-container">
+    <div class="list-promotions dark-card"></div>
+    <div class="list-products dark-card"></div>
+    <div class="order dark-card">
+      <div class="container-order blur-card">
+        <h1 class="order-resume">Resumo Pedido</h1>
+        <div class="circle">{% include 'sales_panel/svg_layout/Shopping cart.svg'%}</div>
+        <div class="items-price dark-card"></div>
+        <div class="payment-resume dark-card"></div>
+        <div class="total dark-card"></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

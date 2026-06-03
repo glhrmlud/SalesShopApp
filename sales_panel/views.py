@@ -18,6 +18,5 @@ def api_sales_panel(request):
       'stock': product.stock,
       'image': product.image.url if product.image else None,
     })
-  print("DADOS FORMATADOS", data_product)
   return JsonResponse({'products': data_product})
 

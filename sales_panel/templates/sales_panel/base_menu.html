@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
+  <link rel="stylesheet" href="{% static 'sales_panel/css/base_menu.css' %}">
+</head>
+
+<body>
+  <div class="container">
+    <div class="top-menu">
+      <div class="circle">VN</div>
+      <div class="circle search">{% include 'sales_panel/svg_layout/Search.svg' %}</div>
+      <div class="user">
+        {% block user %}
+        <div class="circle user-image"></div>
+        <p>NOME</p>
+        <p>CARGO</p>
+        {% endblock %}
+      </div>
+    </div>
+    <div class="side-bar">
+      {% block side-bar %}
+      <div class="circle">{% include 'sales_panel/svg_layout/edit.svg' %}</div>
+      <div class="circle">{% include 'sales_panel/svg_layout/Log out.svg' %}</div>
+      {% endblock %}
+    </div>
+
+    <div class="view">
+      {% block view %}
+      {% endblock %}
+    </div>
+
+  </div>
+
+
+</body>
+
+</html>

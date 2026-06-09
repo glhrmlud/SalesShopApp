@@ -7,36 +7,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu</title>
   <link rel="stylesheet" href="{% static 'sales_panel/css/base_menu.css' %}">
+  {% block link_css %} {% endblock%}
+  <!-- FONTE PERSONALIZADA -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-  <div class="container">
+  <div class="global-container">
+    <div class="circle blur enterprise-logo">
+      <p class="text">L</p>
+    </div>
+    <nav class="side-nav">
+      <div class="square blur" id="edit-button">{% include 'sales_panel/svg_layout/edit.svg' %}</div>
+      {% block buttons %} {% endblock %}
+      <div class="square blur" id="logout">{% include 'sales_panel/svg_layout/Log out.svg' %}</div>
+    </nav>
     <div class="top-menu">
-      <div class="circle">VN</div>
-      <div class="circle search">{% include 'sales_panel/svg_layout/Search.svg' %}</div>
-      <div class="user">
-        {% block user %}
-        <div class="circle user-image"></div>
-        <p>NOME</p>
-        <p>CARGO</p>
-        {% endblock %}
+      <div class="search-bar blur">
+        <input type="text" placeholder="Search something here" class="search text">
+        <div class="icon">{% include 'sales_panel/svg_layout/Search.svg' %}</div>
+      </div>
+
+      <div class="user-container">
+        <div class="user-photo circle">{% block user_photo %} {% endblock %}</div>
+        <p class="username text">{% block username %} nome {% endblock %}</p>
+        <p class="role text">{% block role %} Cargo {% endblock %}</p>
       </div>
     </div>
-    <div class="side-bar">
-      {% block side-bar %}
-      <div class="circle">{% include 'sales_panel/svg_layout/edit.svg' %}</div>
-      <div class="circle">{% include 'sales_panel/svg_layout/Log out.svg' %}</div>
-      {% endblock %}
-    </div>
-
-    <div class="view">
-      {% block view %}
-      {% endblock %}
-    </div>
-
+    {% block view_container %}
+    <div class="view-container"></div>
+    {% endblock %}
   </div>
-
-
 </body>
 
 </html>

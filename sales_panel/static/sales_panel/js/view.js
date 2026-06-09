@@ -1,4 +1,4 @@
-list_products = document.querySelector('#list_products')
+list_products = document.querySelector('.list_products')
 
 fetch('/api/products/')
   .then(response => response.json())

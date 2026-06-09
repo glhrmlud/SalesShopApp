@@ -1,0 +1,63 @@
+/* ESITLOS GERAIS */
+
+.view-container .square {
+  aspect-ratio: 0;
+}
+
+.border {
+  border: var(--sc-color) 2px solid;
+}
+
+.card {
+  background-color: var(--sc-color);
+}
+
+.line-card {
+  padding: 10px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ESTILOS ESPECIFICOS */
+
+.view-container {
+  padding: 10px;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 100%;
+}
+
+/* LISTA PRODUTOS */
+.list-products {
+  grid-row: 1/3;
+  grid-column: 1/2;
+  width: 95%;
+  height: 95%;
+}
+
+.order {
+  width: 95%;
+  height: 95%;
+  padding: 15px;
+}
+
+.order .card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.order .card .text {
+  font-weight: bolder;
+}
+
+.order .line-card .line {
+  width: 100%;
+  color: var(--text-color);
+  opacity: 0.5;
+}

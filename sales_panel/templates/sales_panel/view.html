@@ -1,29 +1,38 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'sales_panel/css/view.css' %}">
-</head>
-
-<body>
-  <div class="view-container">
-    <div class="list-promotions dark-card"></div>
-    <div class="list-products dark-card"></div>
-    <div class="order dark-card">
-      <div class="container-order blur-card">
-        <h1 class="order-resume">Resumo Pedido</h1>
-        <div class="circle">{% include 'sales_panel/svg_layout/Shopping cart.svg'%}</div>
-        <div class="items-price dark-card"></div>
-        <div class="payment-resume dark-card"></div>
-        <div class="total dark-card"></div>
+<div class="view-container">
+  <div class="list-products border square"></div>
+  <div class="order border square">
+    <div class="border square card">
+      <!-- ORDERED ITEMS  -->
+      <div class="container-order border square line-card">
+        <p class="text">Ordered Items<span id="amount"></span></p>
+        <div class="ordered-items ">
+          <div class="line">
+            <p class="item-name text">2xitem1</p>
+            <p class="item-price text">R$20,00</p>
+          </div>
+        </div>
+      </div>
+      <!-- PAYMENT SUMMERY -->
+      <div class="container-summery border square line-card">
+        <p class="text">Payment Summery</p>
+        <div class="payment-summery">
+          <div class="line">
+            <p class="subtotal text">Subtotal</p>
+            <p class="subtotal-value text">R$20,00</p>
+          </div>
+          <div class="line">
+            <p class="tax text">Tax</p>
+            <p class="tax-value text">R$5,00</p>
+          </div>
+        </div>
+      </div>
+      <!-- TOTAL  -->
+      <div class="container-total border square line-card">
+        <div class="line">
+          <p class="total text">Total</p>
+          <p class="total-value text">R$25,00</p>
+        </div>
       </div>
     </div>
-
   </div>
-
-</body>
-
-</html>
+</div>

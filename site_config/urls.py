@@ -10,6 +10,8 @@ app_name = "sales_panel"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("sales_panel.urls")),
+
+
 ]
 
 if settings.DEBUG:

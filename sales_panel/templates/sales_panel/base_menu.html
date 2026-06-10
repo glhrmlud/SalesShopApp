@@ -24,7 +24,11 @@
     <nav class="side-nav">
       <div class="square blur" id="edit-button">{% include 'sales_panel/svg_layout/edit.svg' %}</div>
       {% block buttons %} {% endblock %}
-      <div class="square blur" id="logout">{% include 'sales_panel/svg_layout/Log out.svg' %}</div>
+      <form action="{% url 'sales_panel:logout' %}" method="post">
+        {% csrf_token %}
+        <button class="square blur" id="logout" type="submit"> {% include 'sales_panel/svg_layout/Log out.svg' %}
+        </button>
+      </form>
     </nav>
     <div class="top-menu">
       <div class="search-bar blur">

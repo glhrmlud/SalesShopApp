@@ -102,8 +102,15 @@ svg path {
   align-self: flex-start;
 }
 
-.side-nav #logout {
+.side-nav form {
   align-self: flex-end;
+  width: 60%;
+}
+
+.side-nav #logout {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /* MENU TOPO */

@@ -1,8 +1,10 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from products.models import Products
 # Create your views here.
 
+@login_required
 def init_sales_page(request):
   return render(request, 'sales_panel/sales_panel.html')
 

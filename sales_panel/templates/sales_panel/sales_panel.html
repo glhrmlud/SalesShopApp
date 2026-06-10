@@ -2,7 +2,10 @@
 {% load static %}
 {% block link_css %}
 <link rel="stylesheet" href="{% static 'sales_panel/css/view.css' %}">
-{%endblock%}
+{% endblock %}
 {% block view_container %}
 {% include 'sales_panel/view.html' %}
+{% endblock %}
+{% block scripts_js %}
+<script src="{% static 'sales_panel/js/view.js' %}"></script>
 {% endblock %}

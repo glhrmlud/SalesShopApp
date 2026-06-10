@@ -37,8 +37,16 @@
   grid-column: 1/2;
   width: 95%;
   height: 95%;
+  /* overflow-y: scroll; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(autofill, minmax());
+  padding: 20px;
 }
 
+
+
+/* "CARRINHO"  */
 .order {
   width: 95%;
   height: 95%;

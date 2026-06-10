@@ -9,6 +9,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = "sales_panel:salespanel"
+LOGIN_URL = "sales_panel:login"
+LOGOUT_REDIRECT_URL = "sales_panel:login"
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

@@ -8,6 +8,11 @@
   --svg-color: #E2E2E2;
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--pr-color) var(--sc-color);
+}
+
 
 /* ESTILOS GERAIS */
 * {

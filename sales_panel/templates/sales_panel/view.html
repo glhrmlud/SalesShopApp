@@ -6,12 +6,7 @@
       <!-- ORDERED ITEMS  -->
       <div class="container-order border square line-card">
         <p class="text">Ordered Items<span id="amount"></span></p>
-        <div class="ordered-items ">
-          <div class="line">
-            <p class="item-name text">2xitem1</p>
-            <p class="item-price text">R$20,00</p>
-          </div>
-        </div>
+        <div class="ordered-items"> </div>
       </div>
       <!-- PAYMENT SUMMERY -->
       <div class="container-summery border square line-card">
@@ -19,21 +14,34 @@
         <div class="payment-summery">
           <div class="line">
             <p class="subtotal text">Subtotal</p>
-            <p class="subtotal-value text">R$20,00</p>
+            <p class="subtotal-value text" data-subtotal="0"></p>
           </div>
-          <div class="line">
+          <!-- <div class="line">
             <p class="tax text">Tax</p>
             <p class="tax-value text">R$5,00</p>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- TOTAL  -->
       <div class="container-total border square line-card">
         <div class="line">
           <p class="total text">Total</p>
-          <p class="total-value text">R$25,00</p>
+          <p class="total-value text"></p>
         </div>
       </div>
     </div>
+
+    <!-- FORMULÁRIO DE ENVIO  -->
+    <form action="" id="form-order">
+      <button class="btn-order print-receipt square" id="btn-receipt">
+        <div class="circle blur"> {% include 'sales_panel/svg_layout/Printer.svg' %} </div>
+        <p class="text">Print Receipt</p>
+      </button>
+
+      <button class="btn-order place-order square" id="btn-place-order">
+        <div class="circle blur"> {% include 'sales_panel/svg_layout/check_box.svg' %} </div>
+        <p class="text">Place Order</p>
+      </button>
+    </form>
   </div>
 </div>

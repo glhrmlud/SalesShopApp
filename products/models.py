@@ -14,3 +14,6 @@ class Products(models.Model):
   stock = models.IntegerField(
     validators=[MinValueValidator(0, message='O estoque não pode ser negativo!!')]
   )
+
+  def __str__(self):
+    return f"{self.name}"

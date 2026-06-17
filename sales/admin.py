@@ -8,7 +8,7 @@ class CustomerAdmin(admin.ModelAdmin):
 
 @admin.register(Sale)
 class SaleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer', 'seller', 'status', 'total', 'created_at')
+    list_display = ('id', 'customer', 'seller', 'status', 'get_total', 'created_at')
     list_filter = ('status',)
 
 @admin.register(ItemSale)

@@ -1,4 +1,5 @@
 {% extends 'sales_panel/base_menu.html' %}
+<form style="display: none;">{% csrf_token %}</form>
 {% load static %}
 {% block link_css %}
 <link rel="stylesheet" href="{% static 'sales_panel/css/view.css' %}">

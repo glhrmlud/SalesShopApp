@@ -3,7 +3,7 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 
 class Products(models.Model):
-  image = models.ImageField(upload_to='products_image/')
+  image = models.ImageField(upload_to='products_image/', blank=True, null=True)
   name = models.CharField(max_length=150)
   description = models.TextField()
   price = models.DecimalField(

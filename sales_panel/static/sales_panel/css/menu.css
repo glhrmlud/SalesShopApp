@@ -114,7 +114,6 @@ svg path {
 
 .side-nav #logout {
   width: 100%;
-  height: 100%;
   border: none;
 }
 
@@ -187,7 +186,7 @@ svg path {
 .top-menu .user-container .username {
   grid-row: 1/2;
   grid-column: 2/3;
-  justify-self: end;
+  justify-self: flex-start;
   font-size: 18px;
   font-weight: bold;
   text-transform: capitalize;

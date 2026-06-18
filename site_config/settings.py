@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'sales_panel',
     'products',
     'sales',
+    'login',
+    'customers',
 ]
 
 MIDDLEWARE = [

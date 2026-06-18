@@ -9,7 +9,7 @@ from products.models import Products
 
 @login_required
 def init_sales_page(request):
-  return render(request, 'sales_panel/sales_panel.html')
+  return render(request, 'sales_panel/view.html')
 
 def get_products(request):
   offset = int(request.GET.get('offset', 0))

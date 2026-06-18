@@ -1,4 +1,5 @@
-{% load static %}
+{% extends 'sales_panel/menu.html' %}
+{% block view_container%}
 <div class="view-container">
   <div class="list-products border square"></div>
   <div class="order border square">
@@ -38,10 +39,12 @@
         <p class="text">Print Receipt</p>
       </button>
 
-      <button class="btn-order place-order square" id="btn-place-order">
+      <button class="btn-order place-order square" id="btn-place-order" type="submit">
         <div class="circle blur"> {% include 'sales_panel/svg_layout/check_box.svg' %} </div>
         <p class="text">Place Order</p>
       </button>
     </form>
   </div>
 </div>
+
+{% endblock %}

@@ -6,8 +6,8 @@ from . import views
 app_name = "sales_panel"    
 
 urlpatterns = [
-    path("login/", auth_views.LoginView.as_view(template_name="sales_panel/login.html"), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(next_page="/login"), name="logout"),
+    path("login/", auth_views.LoginView.as_view(template_name="sales_panel/login_sales_panel.html"), name="login"),
+    path("logout/", auth_views.LogoutView.as_view(next_page="sales_panel/login_sales_panel.html"), name="logout"),
     path('salesPanel/', views.init_sales_page, name="salespanel"),
     path('api/products/', views.get_products, name="api_products"),
     path('api/verifyProductAdd/', views.verify_product_add, name='api_verify_product'),

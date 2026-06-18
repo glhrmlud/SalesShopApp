@@ -43,20 +43,23 @@ function createItemOrderedItems(id, name, price) {
   `
 }
 
+function updateOrderedItems(id, line) {
+  // ALTERAR QUANTIDADE DO ITEM
+  const quantLine = line.querySelector('.item-name span');
+  const intQuant = parseInt(quantLine.textContent);
+  quantLine.innerHTML = `${intQuant + 1}`;
+  quantLine.dataset.quant = parseFloat(quantLine.dataset.quant) + 1;
+  // ALTERAR VALOR TOTAL DOS ITENS
+  const priceLine = line.querySelector('.item-price');
+  const floatPrice = parseFloat(priceLine.textContent.slice(2, -1));
+  priceLine.innerHTML = `R$${floatPrice + parseFloat(priceLine.dataset.price)}.00`;
+  cartProducts[id] += 1;
+}
+
 function itemExist(id) {
   const line = document.querySelector(`.container-order .line[data-id="${id}"]`);
   if (line) {
-    // ALTERAR QUANTIDADE DO ITEM
-    const quantLine = line.querySelector('.item-name span');
-    const intQuant = parseInt(quantLine.textContent);
-    quantLine.innerHTML = `${intQuant + 1}`
-    quantLine.dataset.quant = parseFloat(quantLine.dataset.quant) + 1
-    // ALTERAR VALOR TOTAL DOS ITENS
-    const priceLine = line.querySelector('.item-price');
-    const floatPrice = parseFloat(priceLine.textContent.slice(2, -1));
-    priceLine.innerHTML = `R$${floatPrice + parseFloat(priceLine.dataset.price)}.00`
-    cartProducts[id] += 1
-    return true
+    return line
   }
   return false
 }
@@ -98,13 +101,52 @@ async function getProductAdd(dataElement) {
   })
   .then(response => response.json())
   .then(data => {
-    if (!itemExist(data.id)) {
+    const id = data.id
+    const isLine = itemExist(id);
+    if (isLine) {
+      updateOrderedItems(id, isLine);
+    } else {
       item = createItemOrderedItems(data.id, data.name, data.price);
       document.querySelector('.ordered-items').innerHTML += item;
-      cartProducts[data.id] = 1;
+      cartProducts[id] = 1;
     }
-    
   });
+}
+
+async function createCustomer() {
+  return fetch('/api/createCustomer/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify()
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (!data.boolean) {
+      console.log('Error create customer');
+      return false
+    }
+    return data
+  })
+}
+
+async function getCustomer(cpf) {
+  return fetch('/api/verifyCustomer/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({'cpf': cpf})
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (!data.boolean) {
+      console.log('Customer dont exist');
+      return false
+    } 
+    return data
+  })
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -117,9 +159,15 @@ document.addEventListener("DOMContentLoaded", () => {
       await getProductAdd(getData(e));
       updateSubtotal();
       updateTotal();
-      console.log(cartProducts);
+    }
+    else if (e.id == 'btn-place-order') {
+      
     }
   });
+
+  document.querySelector('#form-order').addEventListener('submit', (e) => {
+    e.preventDefault();
+  })
 
   //ESTILO ORDERED ITEMS
   const orderedItems = document.querySelector('.ordered-items');

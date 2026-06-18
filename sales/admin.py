@@ -1,10 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Sale, ItemSale
-
-@admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'cpf', 'phone', 'city', 'state')
-    search_fields = ('name', 'cpf')
+from .models import Sale, ItemSale
 
 @admin.register(Sale)
 class SaleAdmin(admin.ModelAdmin):

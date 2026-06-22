@@ -10,7 +10,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("sales_panel.urls")),
-    path("", include("sales.urls")),
+    path("", include("customers.urls")),
 ]
 
 if settings.DEBUG:

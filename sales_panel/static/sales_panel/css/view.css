@@ -159,6 +159,7 @@
   width: 50%;
   text-align: left;
   font-weight: bold;
+  pointer-events: none;
 }
 
 #form-order .btn-order .circle {
@@ -169,9 +170,11 @@
   aspect-ratio: 1/1;
   height: 40px;
   padding: 5px;
+  pointer-events: none;
 }
 
 #form-order .btn-order svg {
   aspect-ratio: 1/1;
   width: 23px;
+  pointer-events: none;
 }

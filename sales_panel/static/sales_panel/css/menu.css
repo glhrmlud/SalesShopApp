@@ -6,6 +6,7 @@
   --radius-square: 15px;
   --text-color: rgba(255, 255, 255, 0.9);
   --svg-color: #E2E2E2;
+  --bg-modal: #161616;
 }
 
 html {

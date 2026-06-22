@@ -46,4 +46,3 @@ def verify_product_add(request):
     except json.JSONDecodeError:
       return JsonResponse({'status': 'erro', 'mensagem': 'Dados inválidos'}, status=400)
   return JsonResponse({'status': 'erro', 'mensagem': 'Método não permitido'}, status=405)
-

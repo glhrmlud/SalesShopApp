@@ -87,7 +87,6 @@ function updateTotal() {
   const subtotalElement = document.querySelector('.subtotal-value');
   const totalValue = document.querySelector('.total-value');
   totalValue.textContent = `R$${subtotalElement.dataset.subtotal}`;
-
 }
 
 async function getProductAdd(dataElement) {
@@ -113,13 +112,14 @@ async function getProductAdd(dataElement) {
   });
 }
 
-async function createCustomer() {
+async function createCustomer(inputsValues) {
   return fetch('/api/createCustomer/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
     },
-    body: JSON.stringify()
+    body: JSON.stringify(inputsValues)
   })
   .then(response => response.json())
   .then(data => {
@@ -135,18 +135,32 @@ async function getCustomer(cpf) {
   return fetch('/api/verifyCustomer/', {
     method: 'POST',
     headers: {
+      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,  
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({'cpf': cpf})
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      console.log('Cliente não encontrado ou erro na validação:', errData.message);
+      return false;
+    }
+    return response.json();
+  }
+  )
   .then(data => {
-    if (!data.boolean) {
-      console.log('Customer dont exist');
-      return false
+    if (data && data.boolean) {
+      return data;
     } 
-    return data
   })
+  .catch (error => {
+    console.error('Erro crítico na rede ou servidor fora do ar!!', error);
+    return false
+  });
+}
+
+function activate(element) {
+  element.classList.toggle('ativo')
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -160,14 +174,56 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSubtotal();
       updateTotal();
     }
-    else if (e.id == 'btn-place-order') {
-      
-    }
   });
+
+  // FORMULÁRIOS 
+  const modalForm = document.querySelector('.modal-form');
+  const submitModal = modalForm.querySelector('.btn-submit');
+  const modalOverlay = document.querySelector('.modal-overlay');
+  const inputs = [...modalOverlay.querySelectorAll('.form-group')].slice(1);
 
   document.querySelector('#form-order').addEventListener('submit', (e) => {
     e.preventDefault();
-  })
+    activate(modalOverlay);
+
+    inputs.forEach((input) => {
+      input.style.display = 'none'
+      input.querySelector('input').removeAttribute('required')
+    });
+    submitModal.dataset.action = 'login';
+    modalForm.dataset.type = 'login';
+  });
+
+  document.querySelector('.modal-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const modalDataSet = modalForm.dataset.type;
+    if (modalDataSet == 'login' && submitModal.dataset.action == 'login') {
+      const cpf = modalForm.querySelector('#cpf').value;
+      if (cpf != '' && cpf.length == 11) {
+        const data_customer = await getCustomer(cpf);
+        console.log(data_customer)
+        if ( data_customer && data_customer.boolean == true) {
+          activate(modalOverlay);
+          console.log('OK')
+          return;
+        }
+        modalForm.dataset.type = 'sign-up';
+        submitModal.dataset.action = 'sign-up';
+        inputs.forEach((input) => {
+          if (input.id == 'name') {
+            input.setAttribute('required');
+          }
+          input.style.display = 'flex';
+        })
+      }
+    } else if (modalDataSet == 'sign-up' && submitModal.dataset.action == 'sign-up') {
+      console.log('AQUi')
+      const formData = new FormData(modalForm);
+      const customerObject = Object.fromEntries(formData);
+      const customer = await createCustomer(customerObject);
+      console.log(customer);
+    }
+  });
 
   //ESTILO ORDERED ITEMS
   const orderedItems = document.querySelector('.ordered-items');

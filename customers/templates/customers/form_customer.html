@@ -1,0 +1,62 @@
+{% extends 'customers/form_customer_base.html' %}
+{% block form-container %}
+<header class="modal-header">
+  <h2 class="modal-title text">Customer</h2>
+  <button type="button" class="btn-back" aria-label="Go back"
+    onclick="activate(document.querySelector('.modal-overlay'))">
+    {% include 'customers/svg_layout/x.svg' %}
+    </svg>
+  </button>
+</header>
+
+<form class="modal-form" data-type="login">
+  <div class="form-grid">
+
+    <div class="form-group col-6">
+      <label class="form-label" for="cpf">CPF*:</label>
+      <input class="form-input blur" type="text" id="cpf" name="cpf" placeholder="Digite o CPF" required autofocus>
+    </div>
+
+    <div class="form-group col-6">
+      <label class="form-label" for="phone">Phone:</label>
+      <input class="form-input blur" type="tel" id="phone" name="phone" placeholder="Digite o Phone">
+    </div>
+
+    <div class="form-group col-12">
+      <label class="form-label" for="name">Name*:</label>
+      <input class="form-input blur" type="text" id="name" name="name" placeholder="Digite o Nome" required>
+    </div>
+
+    <div class="form-group col-12">
+      <label class="form-label" for="email">Email:</label>
+      <input class="form-input blur" type="email" id="email" name="email" placeholder="Digite o Email">
+    </div>
+
+    <div class="form-group col-12">
+      <label class="form-label" for="address">Adress:</label>
+      <input class="form-input blur" type="text" id="address" name="address" placeholder="Digite o Adress">
+    </div>
+
+    <div class="form-group col-4">
+      <label class="form-label" for="city">City:</label>
+      <input class="form-input blur" type="text" id="city" name="city" placeholder="Digite a City">
+    </div>
+
+    <div class="form-group col-4">
+      <label class="form-label" for="state">State:</label>
+      <input class="form-input blur" type="text" id="state" name="state" placeholder="Digite o State">
+    </div>
+
+    <div class="form-group col-4">
+      <label class="form-label" for="zipcode">Zip Code:</label>
+      <input class="form-input blur" type="text" id="zipcode" name="zipcode" placeholder="Digite o Zip Code">
+    </div>
+
+  </div>
+
+  <footer class="modal-footer">
+    <button class="btn-submit">Cadastre</button>
+  </footer>
+</form>
+
+{% endblock %}

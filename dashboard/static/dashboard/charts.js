@@ -51,5 +51,58 @@ new Chart(document.getElementById('monthChart'), {
     }
 });
 
+new Chart(document.getElementById('productStockChart'), {
+    type: 'bar',
+    data: {
+        labels: productStock.map(item => item.name),
+        datasets: [{
+            label: 'Estoque',
+            data: productStock.map(item => item.total),
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+    }
+});
+
+new Chart(document.getElementById('regionChart'), {
+    type: 'pie',
+    data: {
+        labels: salesByRegion.map(item => item.customer__state),
+        datasets: [{
+            label: 'Vendas por região',
+            data: salesByRegion.map(item => item.total),
+        }]
+    }
+});
+
+new Chart(document.getElementById('customerChart'), {
+    type: 'bar',
+    data: {
+        labels: salesByCustomer.map(item => item.customer__name),
+        datasets: [{
+            label: 'Vendas por cliente',
+            data: salesByCustomer.map(item => item.total),
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+    }
+});
+
+
+
 
 

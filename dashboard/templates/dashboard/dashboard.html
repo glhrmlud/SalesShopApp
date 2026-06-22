@@ -32,7 +32,22 @@
             <div class="card">
                 <h2>Vendas por mês</h2>
                 <canvas id="monthChart"></canvas>
-        </div>
+            </div>
+
+            <div class="card">
+                <h2>Produtos no estoque</h2>
+                <canvas id="productStockChart"></canvas>
+            </div>
+
+            <div class="card">
+                <h2>Vendas por região</h2>
+                <canvas id="regionChart"></canvas>
+            </div>
+
+            <div class="card">
+                <h2>Vendas por cliente</h2>
+                <canvas id="customerChart"></canvas>
+            </div>
 
     </div>
     <script>
@@ -41,6 +56,9 @@
         const salesBySeller = {{ sales_by_seller|safe }};
         const salesByStatus = {{ sales_by_status|safe }};
         const salesByMonth = {{ sales_by_month|safe }};
+        const productStock = {{ product_stock|safe }};
+        const salesByRegion = {{ sales_by_region|safe }};
+        const salesByCustomer = {{ sales_by_customer|safe }};
 
 
     </script>

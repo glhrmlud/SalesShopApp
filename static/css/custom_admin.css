@@ -1,0 +1,125 @@
+/* VARIAVÉIS CSS */
+:root {
+  --body-bg: var(--sc-color);
+  --body-fg: var(--text-color);
+  --darkened-bg: var(--pr-color);
+  --hairline-color: var(--sc-color);
+  --link-fg: var(--text-color);
+  --selected-bg: var(--dstq-color);
+  --body-quiet-color: var(--text-color);
+  --link-selected-fg: var(--dstq-color);
+  --object-tools-bg: var(--add-btn);
+  --button-bg: var(--dstq-color);
+  --default-button-bg: var(--dstq-color);
+  --header-bg: var(--sc-color);
+  --body-medium-color: var(--text-color);
+  --message-success-bg: var(--sc-color);
+  --selected-row: var(--dstq-color);
+  --message-warning-bg: var(--ng-color);
+}
+
+.search-bar {
+  visibility: visible !important;
+}
+
+#toolbar {
+  display: none !important;
+}
+
+.side-nav .square.activate {
+  background-color: var(--dstq-color);
+}
+
+.view-container {
+  display: block !important;
+  padding: 25px 25px !important;
+}
+
+#changelist-filter {
+  background-color: var(--sc-color) !important;
+  border: var(--sc-color) solid !important;
+  overflow: hidden;
+}
+
+.changelist-form-container {
+  background-color: var(--pr-color) !important;
+}
+
+#changelist-form .square {
+  aspect-ratio: initial !important;
+}
+
+#changelist .changelist-footer .paginator {
+  background-color: transparent !important;
+}
+
+.sortable {
+  background-color: transparent !important;
+}
+
+.text a {
+  color: var(--text-color) !important;
+}
+
+.addlink {
+  background-color: var(--add-btn) !important;
+  color: var(--text-color) !important;
+}
+
+#changelist-filter-header {
+  background-color: var(--sc-color);
+}
+
+.submit-row a.deletelink {
+  height: auto !important;
+}
+
+.field-image div {
+  background-color: transparent !important;
+}
+
+.flex-container .datetime .date-icon {
+  filter: brightness(10);
+}
+
+.flex-container .datetime .date-icon:hover {
+  filter: none;
+}
+
+.flex-container .datetime .clock-icon {
+  filter: brightness(10);
+}
+
+.flex-container .datetime .clock-icon:hover {
+  filter: none;
+}
+
+.success {
+  padding: 10px 10px 10px 35px !important;
+}
+
+ul.messagelist li {
+  background-position: 10px 12px !important;
+  border-radius: var(--radius-square);
+}
+
+ul.messagelist li {
+  background-position: 10px 12px !important;
+  border-radius: var(--radius-square);
+}
+
+ul.messagelist li.warning {
+  background-position: 30px 12px !important;
+}
+
+.actions select option {
+  background-color: #161616 !important;
+  color: var(--text-color) !important;
+}
+
+.cancel-link {
+  height: 35.2px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}

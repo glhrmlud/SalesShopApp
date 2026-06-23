@@ -1,4 +1,5 @@
 {% load i18n static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,8 +11,10 @@
   <link rel="stylesheet" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}">
   {% block extrahead %}{% endblock %}
   {% block extrastyle %}{% endblock %}
-
   <link rel="stylesheet" href="{% static 'sales_panel/css/menu.css' %}">
+  <link rel="stylesheet" href="{% static 'sales_panel/css/view.css' %}">
+  <link rel="stylesheet" href="{% static 'css/custom_admin.css' %}">
+  <link rel="stylesheet" href="{% static 'css/custom_admin_index.css' %}">
 </head>
 
 <body>
@@ -41,6 +44,7 @@
     </main>
 
   </div>
+  <script src="{% static 'js/custom_admin.js' %}"></script>
 </body>
 
 </html>

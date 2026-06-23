@@ -108,6 +108,10 @@ svg path {
   cursor: pointer;
 }
 
+.side-nav .square.active {
+  background-color: var(--dstq-color);
+}
+
 .side-nav .square svg {
   width: 50%;
   aspect-ratio: 1/1;
@@ -148,6 +152,7 @@ svg path {
 
 .top-menu .search-bar {
   display: flex;
+  visibility: hidden;
   justify-content: space-between;
   align-items: center;
   width: 25%;
@@ -165,6 +170,11 @@ svg path {
   border: none;
   padding: 0 !important;
   margin: 0 !important;
+}
+
+.top-menu .search-bar .icon {
+  background-color: transparent;
+  border: none;
 }
 
 .top-menu .search-bar .search:focus {

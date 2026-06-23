@@ -5,27 +5,51 @@
   <div class="buttons-container">
     {% if request.user.is_authenticated %}
     {% if request.user.is_superuser %}
-    <a class="square blur" id="overview-button" href="{% url 'sales_panel:salespanel' %}">
+
+    <a class="square blur {% if request.resolver_match.view_name == 'dashboard:dashboard' %}active{% endif %}"
+      id="overview-button" href="{% url 'dashboard:dashboard' %}">
       {% include 'sales_panel/svg_layout/overview.svg' %}
     </a>
-    <a class="square blur" id="seller-button" href="{% url 'admin:auth_user_changelist' %}">
+
+    <a class="square blur {% if 'auth/user' in request.path %}active{% endif %}" id="seller-button"
+      href="{% url 'admin:auth_user_changelist' %}">
       {% include 'sales_panel/svg_layout/sellers.svg' %}
     </a>
-    <a class="square blur" id="product-button" href="{% url 'admin:products_products_changelist' %}">
+
+    <a class="square blur {% if 'customers/customer' in request.path %}active{% endif %}" id="customer-button"
+      href="{% url 'admin:customers_customer_changelist' %}">
+      {% include 'sales_panel/svg_layout/customer.svg' %}
+    </a>
+
+    <a class="square blur {% if 'products/products' in request.path %}active{% endif %}" id="product-button"
+      href="{% url 'admin:products_products_changelist' %}">
       {% include 'sales_panel/svg_layout/product.svg' %}
     </a>
-    <a class="square blur" id="item-sale-button" href="{% url 'admin:sales_itemsale_changelist' %}">
+
+    <a class="square blur {% if 'sales/itemsale' in request.path %}active{% endif %}" id="item-sale-button"
+      href="{% url 'admin:sales_itemsale_changelist' %}">
       {% include 'sales_panel/svg_layout/item_sales.svg' %}
     </a>
-    <a class="square blur" id="sale-button" href="{% url 'admin:sales_sale_changelist' %}">
+
+    <a class="square blur {% if 'sales/sale/' in request.path or 'sales/sale/add' in request.path %}active{% endif %}"
+      id="sale-button" href="{% url 'admin:sales_sale_changelist' %}">
       {% include 'sales_panel/svg_layout/sale.svg' %}
     </a>
+
+    <a class="square blur {% if request.resolver_match.url_name == 'index' %}active{% endif %}" id="overview-button"
+      href="{% url 'admin:index' %}">
+      {% include 'sales_panel/svg_layout/all.svg' %}
+    </a>
+
     {% endif %}
     {% endif %}
-    <a class="square blur" id="edit-button" href="{% url 'sales_panel:salespanel' %}">
+
+    <a class="square blur {% if request.resolver_match.view_name == 'sales_panel:salespanel' %}active{% endif %}"
+      id="edit-button" href="{% url 'sales_panel:salespanel' %}">
       {% include 'sales_panel/svg_layout/edit.svg' %}
     </a>
   </div>
+
   <form action="{% url 'login:logout' %}" method="post">
     {% csrf_token %}
     <button class="square blur" id="logout" type="submit"> {% include 'sales_panel/svg_layout/Log out.svg' %}

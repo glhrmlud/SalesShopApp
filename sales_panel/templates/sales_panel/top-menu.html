@@ -1,8 +1,9 @@
 <header class="top-menu">
-  <div class="search-bar blur">
-    <input type="text" placeholder="Search something here" class="search text">
-    <div class="icon">{% include 'sales_panel/svg_layout/Search.svg' %}</div>
-  </div>
+  <form class="search-bar blur" method="GET" action="">
+    <input id='searchbar' type="text" name="q" class="search text" value="{{ request.GET.q|default:'' }}"
+      placeholder="Search something here">
+    <button class="icon" type="submit">{% include 'sales_panel/svg_layout/Search.svg' %}</button>
+  </form>
 
   <div class="user-container">
     {% if request.user.is_authenticated %}

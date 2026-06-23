@@ -202,6 +202,7 @@
   transform: scale(0.98);
 }
 
-#edit-button {
-  background-color: var(--dstq-color);
+/* EXIBIR BARRA DE BUSCA  */
+.search-bar {
+  visibility: visible !important;
 }

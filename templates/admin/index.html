@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="dashboard-container">
+  <h2 class="dashboard-title">Painel de Gerenciamento</h2>
+
+  {% if app_list %}
+  <div class="apps-grid">
+    {% for app in app_list %}
+    <div class="app-card">
+      <h3 class="app-name">{{ app.name }}</h3>
+
+      <div class="models-links">
+        {% for model in app.models %}
+        {% if model.admin_url %}
+        <a href="{{ model.admin_url }}" class="model-link-button">
+          <span class="model-label">{{ model.name }}</span>
+          <span class="model-action-icon">→</span>
+        </a>
+        {% else %}
+        <span class="model-label disabled">{{ model.name }}</span>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="no-apps">Você não tem permissão para editar nenhum aplicativo ou tabela.</p>
+  {% endif %}
+</div>
+{% endblock %}

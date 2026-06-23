@@ -49,3 +49,15 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+
+#overview-button {
+    background-color: var(--dstq-color);
+}
+
+#edit-button {
+    background-color: var(--sc-color);
+}
+
+.search-bar {
+    visibility: hidden !important;
+}

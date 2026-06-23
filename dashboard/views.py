@@ -51,12 +51,19 @@ def dashboard(request):
     )
 
     # Vendas por regiao
-    sales_by_region = (
+    raw_sales_by_region = (
         Sale.objects
         .values('customer__state')
         .annotate(total=Count('id'))
         .order_by('-total')
     )
+    sales_by_region = [
+        {
+            'customer__state': item['customer__state'] if item['customer__state'] else 'Não Informado',
+            'total': item['total']
+        }
+        for item in raw_sales_by_region
+    ]
 
     # Vendas por cliente
     sales_by_customer = (
@@ -72,7 +79,7 @@ def dashboard(request):
         'sales_by_seller' : list(sales_by_seller),
         'sales_by_status' : list(sales_by_status),
         'product_stock' : list(product_stock),
-        'sales_by_region' : list(sales_by_region),
+        'sales_by_region' : sales_by_region,
         'sales_by_customer' : list(sales_by_customer),
     }
 

@@ -2,7 +2,7 @@
 {% block view_container %}
 <div class="view-container">
   <div class="list-products border square"></div>
-  <div class="order border square">
+  <div class="order border square secao-recibo">
     <div class="border square card">
       <!-- ORDERED ITEMS  -->
       <div class="container-order border square line-card">
@@ -34,10 +34,12 @@
 
     <!-- FORMULÁRIO DE ENVIO  -->
     <form action="" id="form-order">
-      <button class="btn-order print-receipt square" id="btn-receipt">
+      <button class="btn-order print-receipt square" id="btn-receipt" type="button">
         <div class="circle blur"> {% include 'sales_panel/svg_layout/Printer.svg' %} </div>
         <p class="text">Print Receipt</p>
       </button>
+
+      <input type="hidden" id="id-cliente-compra" value="">
 
       <button class="btn-order place-order square" id="btn-place-order" type="submit">
         <div class="circle blur"> {% include 'sales_panel/svg_layout/check_box.svg' %} </div>

@@ -36,11 +36,14 @@ function createItemOrderedItems(id, name, price) {
     name = name.slice(0, 13) + '...';
   } 
   return `
-    <div class="line" data-id="${id}">
+    <div class="line" data-id="${id}" style="align-items: center; margin-bottom: 8px;">
       <p class="item-name text"><span data-quant='1'>1</span> X ${name}</p>
-      <p class="item-price text" data-price='${price}'>R$${price}</p>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <p class="item-price text" data-price='${price}'>R$${price}</p>
+        <div class="remove-btn" data-id="${id}" style="color: #ff4d4d; font-weight: bold; cursor: pointer; padding: 0 5px; font-size: 16px;">×</div>
+      </div>
     </div>
-  `
+  `;
 }
 
 function updateOrderedItems(id, line) {
@@ -121,14 +124,23 @@ async function createCustomer(inputsValues) {
     },
     body: JSON.stringify(inputsValues)
   })
-  .then(response => response.json())
-  .then(data => {
-    if (!data.ok) {
-      console.log('Error create customer');
-      return false
+ .then(response => {
+    if (!response.ok) {
+      console.log('Erro na resposta do servidor ao criar cliente');
+      return false;
     }
-    return data
+    return response.json();
   })
+  .then(data => {
+    if (data && data.boolean) {
+      return data;
+    }
+    return false;
+  })
+  .catch(error => {
+    console.error('Erro crítico no cadastro de cliente:', error);
+    return false;
+  });
 }
 
 async function getCustomer(cpf) {
@@ -166,6 +178,9 @@ function activate(element) {
 document.addEventListener("DOMContentLoaded", () => {
   listProducts = document.querySelector('.list-products');
   cartProducts = {};
+
+  let currentCustomerId = null;
+
   getProducts();
   document.addEventListener('click', async (event) => {
     const e = event.target;
@@ -173,6 +188,28 @@ document.addEventListener("DOMContentLoaded", () => {
       await getProductAdd(getData(e));
       updateSubtotal();
       updateTotal();
+    }
+    else if (e.classList.contains('remove-btn')) {
+        const idDoProduto = e.dataset.id;
+
+        if (cartProducts[idDoProduto]) {
+            delete cartProducts[idDoProduto];
+        }
+
+        const linhaDoItem = document.querySelector(`.container-order .line[data-id="${idDoProduto}"]`);
+        if (linhaDoItem) {
+            linhaDoItem.remove();
+        }
+
+        const possuiItensRestantes = document.querySelectorAll('.container-order .line').length > 0;
+        if (possuiItensRestantes) {
+            updateSubtotal();
+            updateTotal();
+        } else {
+            document.querySelector('.subtotal-value').textContent = 'R$0.00';
+            document.querySelector('.subtotal-value').dataset.subtotal = '0';
+            document.querySelector('.total-value').textContent = 'R$0.00';
+        }
     }
   });
 
@@ -213,7 +250,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const data_customer = await getCustomer(cpf);
 
       if (data_customer && data_customer.boolean) {
+
+        currentCustomerId = data_customer.id;
+
         activate(modalOverlay);
+
+        await enviarVendaDefinitiva(currentCustomerId);
         return;
       }
   
@@ -228,9 +270,68 @@ document.addEventListener("DOMContentLoaded", () => {
       const formData = new FormData(modalForm);
       const customerObject = Object.fromEntries(formData);
       const customer = await createCustomer(customerObject);
-      activate(modalOverlay);
+
+      if (customer && customer.boolean) {
+        currentCustomerId = customer.id;
+        activate(modalOverlay);
+
+        await enviarVendaDefinitiva(currentCustomerId);
+      } else {
+        alert("Não foi possível realizar o cadastro. Verifique os campos informados.");
+      }
     }
   });
+
+  async function enviarVendaDefinitiva(customerId) {
+    const itensFormatados = Object.keys(cartProducts).map(productId => {
+        return {
+            id: parseInt(productId),
+            quantidade: cartProducts[productId]
+        };
+    });
+
+    if (itensFormatados.length === 0) {
+        alert("O carrinho esta vazio.");
+        return;
+    }
+
+    try {
+        const response = await fetch('/salesPanel/finalizar-venda/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'aplication/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify({
+                customer_id: customerId,
+                items: itensFormatados
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            alert(`Venda #${data.sale_id} processada e salva com sucesso!`);
+            window.location.reload();
+        } else {
+            alert("Erro ao salvar venda: " + data.mensagem);
+        }
+    } catch (error) {
+        console.error("Erro na requisição da venda:", error);
+        alert("Erro crítico ao tentar salvar a venda.");
+    }
+  }
+
+  document.getElementById('btn-receipt').addEventListener('click', () => {
+
+    const possuiItens = Object.keys(cartProducts).length > 0;
+    if (!possuiItens) {
+        alert("O carrinho está vazio! Adicione produtos para gerar um recibo.");
+        return;
+    }
+
+    window.print();
+  })
 
   const inputCpf = document.querySelector('#cpf');
 

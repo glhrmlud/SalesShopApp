@@ -11,6 +11,7 @@ def verify_customer(request):
       customer = Customer.objects.get(cpf=customer_cpf)
       return JsonResponse({
         'status':'customer found',
+        'id': customer.id,
         'cpf':customer.cpf,
         'name':customer.name,
         'boolean': True,

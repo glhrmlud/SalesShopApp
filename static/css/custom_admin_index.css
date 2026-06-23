@@ -1,4 +1,7 @@
-/* Container Geral do Dashboard */
+.search-bar {
+  visibility: hidden !important;
+}
+
 .view-container {
   justify-content: left !important;
   align-items: start !important;
@@ -68,11 +71,9 @@
 /* Efeito Hover ao passar o mouse na tabela */
 .model-link-button:hover {
   background-color: #3b82f6;
-  /* Transiciona para azul */
   color: #ffffff;
   border-color: #3b82f6;
   transform: translateY(-2px);
-  /* Efeito sutil de flutuar */
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 

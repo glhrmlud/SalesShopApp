@@ -11,4 +11,5 @@ urlpatterns = [
     path('salesPanel/', views.init_sales_page, name="salespanel"),
     path('api/products/', views.get_products, name="api_products"),
     path('api/verifyProductAdd/', views.verify_product_add, name='api_verify_product'),
+    path('salesPanel/finalizar-venda/', views.finalize_sale_view, name="finalizar_venda"),
 ]

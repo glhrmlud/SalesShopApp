@@ -108,7 +108,7 @@ new Chart(document.getElementById('productStockChart'), {
 new Chart(document.getElementById('regionChart'), {
     type: 'pie',
     data: {
-        labels: salesByRegion.map(item => item.customer__state),
+        labels: salesByRegion.map(item => item.customer__state || 'Não Informado'),
         datasets: [{
             label: 'Vendas por região',
             data: salesByRegion.map(item => item.total),
@@ -127,6 +127,7 @@ new Chart(document.getElementById('regionChart'), {
     }
 });
 
+
 new Chart(document.getElementById('customerChart'), {
     type: 'bar',
     data: {
@@ -134,7 +135,7 @@ new Chart(document.getElementById('customerChart'), {
         datasets: [{
             label: 'Vendas por cliente',
             data: salesByCustomer.map(item => item.total),
-            backgroundColor: 'rgba(236, 72, 153, 0.8)',  // rosa
+            backgroundColor: 'rgba(236, 72, 153, 0.8)',
             borderRadius: 8,
         }]
     },
@@ -147,6 +148,7 @@ new Chart(document.getElementById('customerChart'), {
         }
     }
 });
+
 
 
 

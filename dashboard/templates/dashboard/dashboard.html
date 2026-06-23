@@ -40,6 +40,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+<<<<<<< HEAD
     const topProducts = {{ top_products| safe }};
     const salesBySeller = {{ sales_by_seller| safe }};
     const salesByStatus = {{ sales_by_status| safe }};
@@ -47,6 +48,16 @@
     const productStock = {{ product_stock| safe }};
     const salesByRegion = {{ sales_by_region| safe }};
     const salesByCustomer = {{ sales_by_customer| safe }};
+=======
+    const topProducts = {{ top_products|safe }};
+    const salesBySeller = {{ sales_by_seller|safe }};
+    const salesByStatus = {{ sales_by_status|safe }};
+    const salesByMonth = {{ sales_by_month|safe }};
+    const productStock = {{ product_stock|safe }};
+    const salesByRegion = {{ sales_by_region|safe }};
+    const salesByCustomer = {{ sales_by_customer|safe }};
+
+>>>>>>> c426dbeab9e0df0468e1ac313d038c6802929ba0
 </script>
 
 <script src="{% static 'dashboard/charts.js' %}"></script>

@@ -123,7 +123,7 @@ async function createCustomer(inputsValues) {
   })
   .then(response => response.json())
   .then(data => {
-    if (!data.boolean) {
+    if (!data.ok) {
       console.log('Error create customer');
       return false
     }
@@ -185,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector('#form-order').addEventListener('submit', (e) => {
     e.preventDefault();
     activate(modalOverlay);
+    modalForm.reset();
 
     inputs.forEach((input) => {
       input.style.display = 'none'
@@ -192,37 +193,49 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     submitModal.dataset.action = 'login';
     modalForm.dataset.type = 'login';
+    submitModal.textContent = 'Login';
   });
 
   document.querySelector('.modal-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const modalDataSet = modalForm.dataset.type;
     if (modalDataSet == 'login' && submitModal.dataset.action == 'login') {
-      const cpf = modalForm.querySelector('#cpf').value;
-      if (cpf != '' && cpf.length == 11) {
-        const data_customer = await getCustomer(cpf);
-        console.log(data_customer)
-        if ( data_customer && data_customer.boolean == true) {
-          activate(modalOverlay);
-          console.log('OK')
-          return;
-        }
-        modalForm.dataset.type = 'sign-up';
-        submitModal.dataset.action = 'sign-up';
-        inputs.forEach((input) => {
-          if (input.id == 'name') {
-            input.setAttribute('required');
-          }
-          input.style.display = 'flex';
-        })
+      const cpfElement = modalForm.querySelector('#cpf');
+      const cpf = cpfElement.value;
+      const justNumber = /^\d+$/.test(cpf);
+      cpfElement.setCustomValidity(""); 
+      if (cpf === '' || cpf.length !== 11 || !justNumber) {
+        cpfElement.setCustomValidity("O CPF deve ter um formato válido!");
+        cpfElement.reportValidity();
+        return;
       }
+
+      const data_customer = await getCustomer(cpf);
+
+      if (data_customer && data_customer.boolean) {
+        activate(modalOverlay);
+        return;
+      }
+  
+      modalForm.dataset.type = 'sign-up';
+      submitModal.dataset.action = 'sign-up';
+      submitModal.textContent = 'Cadastre'
+      inputs.forEach((input) => {
+        input.querySelector('.form-input').id == 'name' ? input.querySelector('.form-input').required = true : undefined;
+        input.style.display = 'flex';
+      });
     } else if (modalDataSet == 'sign-up' && submitModal.dataset.action == 'sign-up') {
-      console.log('AQUi')
       const formData = new FormData(modalForm);
       const customerObject = Object.fromEntries(formData);
       const customer = await createCustomer(customerObject);
-      console.log(customer);
+      activate(modalOverlay);
     }
+  });
+
+  const inputCpf = document.querySelector('#cpf');
+
+  inputCpf.addEventListener('input', function() {
+    this.setCustomValidity(""); 
   });
 
   //ESTILO ORDERED ITEMS

@@ -1,8 +1,8 @@
-{% extends 'sales_panel/login_base.html' %}
+{% extends 'login/login_base.html' %}
 
 {% block login_container %}
 
-{% block title %} <h2>SalesShopApp - Painel</h2> {% endblock %}
+{% block title %} <h2>Login - Sales Panel</h2> {% endblock %}
 
 {% if form.errors %}
 <p class="error-msg">Usuário ou senha incorretos. Tente novamente.</p>
@@ -21,7 +21,7 @@
     <input type="password" name="password" id="id_password" required placeholder="Digite sua senha">
   </div>
 
-  <button type="submit" class="btn-login">Entrar no Sistema</button>
+  <button type="submit" class="btn-login">Login</button>
 </form>
 
 {% endblock %}

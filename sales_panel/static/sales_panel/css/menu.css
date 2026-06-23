@@ -1,17 +1,19 @@
 /* VARIÁVEIS CSS */
 :root {
-  --pr-color: #0C0C0C;
+  --pr-color: #0c0c0c;
   --sc-color: rgba(226, 226, 226, 0.05);
   --radius: 50px;
   --radius-square: 15px;
   --text-color: rgba(255, 255, 255, 0.9);
   --svg-color: #E2E2E2;
   --bg-modal: #161616;
+  --ng-color: #8A1E20;
+  --dstq-color: rgba(29, 38, 119, 0.5);
 }
 
 html {
-  scrollbar-width: thin;
-  scrollbar-color: var(--pr-color) var(--sc-color);
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--pr-color) var(--sc-color) !important;
 }
 
 
@@ -20,15 +22,22 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Instrument Sans", sans-serif;
+  font-family: "Instrument Sans", sans-serif !important;
+}
+
+p {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: normal !important;
 }
 
 body {
-  background-color: var(--pr-color);
+  background-color: var(--pr-color) !important;
+  font-size: 1em !important;
 }
 
 .text {
-  color: var(--text-color);
+  color: var(--text-color) !important;
   opacity: 0.9;
 }
 
@@ -47,8 +56,8 @@ body {
 }
 
 svg path {
-  stroke: var(--svg-color);
-  opacity: 0.9;
+  stroke: var(--svg-color) !important;
+  opacity: 0.9 !important;
 }
 
 /* ESTILOS ESPECIFICOS */
@@ -104,8 +113,14 @@ svg path {
   aspect-ratio: 1/1;
 }
 
-.side-nav #edit-button {
+.side-nav .buttons-container {
   align-self: flex-start;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+
 }
 
 .side-nav form {
@@ -148,6 +163,8 @@ svg path {
   height: 30px;
   width: 85%;
   border: none;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .top-menu .search-bar .search:focus {
@@ -207,4 +224,49 @@ svg path {
   height: 100%;
   border-radius: var(--radius) 0 0 0;
   background-color: var(--pr-color);
+}
+
+/* ANIMAÇÕES  */
+
+/* Suaviza a transição de cor e tamanho de todos os elementos interativos */
+.side-nav .square,
+.side-nav #logout,
+.top-menu .search-bar,
+.top-menu .search-bar .icon svg {
+  transition: all 0.2s ease;
+}
+
+/* 1. Botões Quadrados do Menu Lateral */
+.side-nav .square:hover {
+  background-color: var(--dstq-color);
+  /* Dá um leve destaque no fundo */
+  transform: translateY(-2px);
+  /* Efeito flutuante sutil */
+}
+
+.side-nav .square:active {
+  transform: translateY(0) scale(0.95);
+  /* Efeito de clique */
+}
+
+/* 2. Botão de Logout (Sair) */
+.side-nav #logout:hover {
+  background-color: var(--ng-color);
+  cursor: pointer;
+}
+
+.side-nav #logout:active {
+  transform: scale(0.95);
+}
+
+/* 3. Barra de Pesquisa (Quando o usuário clica para digitar) */
+.top-menu .search-bar:has(.search:focus) {
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+/* 4. Ícone de Lupa da Barra de Pesquisa */
+.top-menu .search-bar .icon:hover svg {
+  opacity: 1;
+  transform: scale(1.1);
 }

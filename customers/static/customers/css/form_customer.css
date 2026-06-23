@@ -92,7 +92,7 @@
   font-weight: 500;
   border: none;
   border-radius: 20px;
-  background-color: var(--print-place);
+  background-color: var(--dstq-color);
   color: var(--text-color);
   cursor: pointer;
   transition: filter 0.2s ease;
@@ -100,4 +100,43 @@
 
 .btn-submit:hover {
   filter: brightness(1.2);
+}
+
+/* ANIMAÇÕES */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  /* Configuração da transição de opacidade e movimento */
+  opacity: 0;
+  transform: translateX(-15px);
+  /* Começa levemente deslocado para a esquerda */
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), display 0.35s ease;
+  transition-behavior: allow-discrete;
+  /* Permite que o display e a animação dancem juntos */
+}
+
+/* Quando o JS colocar o elemento como visível (style.display = 'flex') */
+.form-group[style*="display: flex"] {
+  opacity: 1;
+  transform: translateX(0);
+  /* Volta para a posição original */
+}
+
+/* Garante o estado inicial toda vez que o elemento "nascer" no DOM */
+@starting-style {
+  .form-group[style*="display: flex"] {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+}
+
+/* Opcional: Garante que o campo de CPF (que já começa visível) não reanime à toa */
+#cpf-group,
+/* Se você colocar um ID na div pai do CPF */
+.form-grid>.form-group:first-child,
+.form-grid>.form-group:nth-child(2) {
+  opacity: 1;
+  transform: translateX(0);
 }

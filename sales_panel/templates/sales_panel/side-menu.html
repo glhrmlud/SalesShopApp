@@ -1,0 +1,34 @@
+<div class="circle blur enterprise-logo">
+  <p class="text">L</p>
+</div>
+<nav class="side-nav">
+  <div class="buttons-container">
+    {% if request.user.is_authenticated %}
+    {% if request.user.is_superuser %}
+    <a class="square blur" id="overview-button" href="{% url 'sales_panel:salespanel' %}">
+      {% include 'sales_panel/svg_layout/overview.svg' %}
+    </a>
+    <a class="square blur" id="seller-button" href="{% url 'admin:auth_user_changelist' %}">
+      {% include 'sales_panel/svg_layout/sellers.svg' %}
+    </a>
+    <a class="square blur" id="product-button" href="{% url 'admin:products_products_changelist' %}">
+      {% include 'sales_panel/svg_layout/product.svg' %}
+    </a>
+    <a class="square blur" id="item-sale-button" href="{% url 'admin:sales_itemsale_changelist' %}">
+      {% include 'sales_panel/svg_layout/item_sales.svg' %}
+    </a>
+    <a class="square blur" id="sale-button" href="{% url 'admin:sales_sale_changelist' %}">
+      {% include 'sales_panel/svg_layout/sale.svg' %}
+    </a>
+    {% endif %}
+    {% endif %}
+    <a class="square blur" id="edit-button" href="{% url 'sales_panel:salespanel' %}">
+      {% include 'sales_panel/svg_layout/edit.svg' %}
+    </a>
+  </div>
+  <form action="{% url 'login:logout' %}" method="post">
+    {% csrf_token %}
+    <button class="square blur" id="logout" type="submit"> {% include 'sales_panel/svg_layout/Log out.svg' %}
+    </button>
+  </form>
+</nav>

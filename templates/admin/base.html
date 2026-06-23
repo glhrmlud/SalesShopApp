@@ -1,0 +1,46 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+
+  {{ media }}
+  <link rel="stylesheet" href="{% block stylesheet %}{% static 'admin/css/base.css' %}{% endblock %}">
+  {% block extrahead %}{% endblock %}
+  {% block extrastyle %}{% endblock %}
+
+  <link rel="stylesheet" href="{% static 'sales_panel/css/menu.css' %}">
+</head>
+
+<body>
+  <div class="global-container">
+
+    {% include "sales_panel/side-menu.html" %}
+
+    {% include "sales_panel/top-menu.html" %}
+
+    <main class="view-container" style="overflow-y: auto; padding: 20px;">
+
+      {% block messages %}
+      {% if messages %}
+      <ul class="messagelist">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+          {{ message|capfirst }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endblock messages %}
+
+      {% block content %}
+      {% endblock %}
+
+    </main>
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<header class="top-menu">
+  <div class="search-bar blur">
+    <input type="text" placeholder="Search something here" class="search text">
+    <div class="icon">{% include 'sales_panel/svg_layout/Search.svg' %}</div>
+  </div>
+
+  <div class="user-container">
+    {% if request.user.is_authenticated %}
+
+    {% if request.user.seller_profile and request.user.seller_profile.image %}
+    <img src="{{ request.user.seller_profile.image.url }}" alt="Foto do Vendedor" class="user-photo circle">
+
+    {% elif request.user.admin and request.user.admin.image %}
+    <img src="{{ request.user.admin.image.url }}" alt="Foto do Admin" class="user-photo circle">
+
+    {% else %}
+    <img src="/static/images/default-avatar.png" alt="Foto Padrão" class="user-photo circle">
+    {% endif %}
+
+    {% endif %}
+    <p class="username text"> {{ request.user }} </p>
+    <p class="role text">
+      {% if request.user.is_superuser %}
+      Administrador
+      {% elif request.user.is_staff and not request.user.seller_profile %}
+      Equipe
+      {% elif request.user.seller_profile %}
+      Vendedor
+      {% else %}
+      Undefined
+      {% endif %}
+    </p>
+  </div>
+</header>

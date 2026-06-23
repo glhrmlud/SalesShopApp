@@ -1,17 +1,38 @@
+:root {
+  --card-border: rgba(255, 255, 255, 0.15);
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   padding: 16px;
   box-sizing: border-box;
   z-index: 9999;
   background-color: color-mix(in srgb, var(--pr-color) 80%, transparent 20%);
-  display: none;
+
+  /* Transição de Entrada e Saída */
+  opacity: 0;
+  transition: opacity 0.3s ease, display 0.3s ease;
+  transition-behavior: allow-discrete;
+}
+
+/* Estado Ativo (Entrada) */
+.modal-overlay.ativo {
+  display: flex;
+  opacity: 1;
+}
+
+/* Estado Inicial (Gatilho para quando o modal "nasce" na tela) */
+@starting-style {
+  .modal-overlay.ativo {
+    opacity: 0;
+  }
 }
 
 .modal-container {
@@ -19,11 +40,28 @@
   max-width: 680px;
   padding: 32px 40px;
   border-radius: 16px;
-  box-shadow: 5px 5px 2px rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   background-color: var(--bg-modal);
+
+  /* Transição de Entrada e Saída do Card */
+  transform: scale(0.9) translateY(20px);
+  /* Começa menor e levemente abaixo */
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
 }
 
-.modal-overlay.ativo {
-  display: flex;
+/* Quando o pai está ativo, o container ganha tamanho e opacidade */
+.modal-overlay.ativo .modal-container {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Estado Inicial do Card para animação de entrada */
+@starting-style {
+  .modal-overlay.ativo .modal-container {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+  }
 }

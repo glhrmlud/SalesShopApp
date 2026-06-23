@@ -36,6 +36,7 @@ def create_customer(request):
       return JsonResponse({
         'status': 'sucess',
         'id' : new_register.id,
+        'cpf' : new_register.cpf,
         'name': new_register.name,
         'boolean': True,
       }, status = 201)

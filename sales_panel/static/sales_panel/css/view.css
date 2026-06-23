@@ -1,7 +1,6 @@
 /* VARIÁVEIS CSS */
 :root {
   --add-btn: #16972A;
-  --print-place: rgba(29, 38, 119, 0.5);
 }
 
 /* ESITLOS GERAIS */
@@ -163,7 +162,7 @@
 }
 
 #form-order .btn-order .circle {
-  background-color: var(--print-place);
+  background-color: var(--dstq-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,4 +176,32 @@
   aspect-ratio: 1/1;
   width: 23px;
   pointer-events: none;
+}
+
+/* ANIMAÇÕES */
+.add-btn,
+#form-order .btn-order {
+  transition: filter 0.2s ease, transform 0.1s ease;
+}
+
+/* Hover do botão de adicionar produto */
+.add-btn:hover {
+  filter: brightness(1.15);
+}
+
+.add-btn:active {
+  transform: scale(0.95);
+}
+
+/* Hover dos botões do carrinho */
+#form-order .btn-order:hover {
+  filter: brightness(1.25);
+}
+
+#form-order .btn-order:active {
+  transform: scale(0.98);
+}
+
+#edit-button {
+  background-color: var(--dstq-color);
 }

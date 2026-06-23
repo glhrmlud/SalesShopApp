@@ -9,9 +9,11 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("auth/", include("login.urls", namespace="login")),
     path("", include("sales_panel.urls")),
     path("", include("customers.urls")),
 ]
 
 if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

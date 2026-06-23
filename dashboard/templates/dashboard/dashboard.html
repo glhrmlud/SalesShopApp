@@ -1,0 +1,54 @@
+{% extends 'sales_panel/menu.html' %}
+{% load static %}
+
+{% block view_container %}
+<link rel="stylesheet" href="{% static 'dashboard/dashboard.css' %}">
+
+<div class="view-container">
+    <div class="grid">
+        <div class="card">
+            <h2>Produtos mais vendidos</h2>
+            <canvas id="topProductsChart"></canvas>
+        </div>
+        <div class="card">
+            <h2>Vendas por vendedor</h2>
+            <canvas id="sellerChart"></canvas>
+        </div>
+        <div class="card">
+            <h2>Status das vendas</h2>
+            <canvas id="statusChart"></canvas>
+        </div>
+        <div class="card card-two">
+            <h2>Vendas por mês</h2>
+            <canvas id="monthChart"></canvas>
+        </div>
+        <div class="card card-two">
+            <h2>Estoque dos produtos</h2>
+            <canvas id="productStockChart"></canvas>
+        </div>
+        <div class="card card-two">
+            <h2>Vendas por região</h2>
+            <canvas id="regionChart"></canvas>
+        </div>
+        <div class="card card-two">
+            <h2>Vendas por cliente</h2>
+            <canvas id="customerChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const topProducts = {{ top_products|safe }};
+    const salesBySeller = {{ sales_by_seller|safe }};
+    const salesByStatus = {{ sales_by_status|safe }};
+    const salesByMonth = {{ sales_by_month|safe }};
+    const productStock = {{ product_stock|safe }};
+    const salesByRegion = {{ sales_by_region|safe }};
+    const salesByCustomer = {{ sales_by_customer|safe }};
+</script>
+
+<script src="{% static 'dashboard/charts.js' %}"></script>
+
+{% endblock %}

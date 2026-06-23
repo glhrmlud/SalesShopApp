@@ -12,6 +12,7 @@ urlpatterns = [
     path("auth/", include("login.urls", namespace="login")),
     path("", include("sales_panel.urls")),
     path("", include("customers.urls")),
+    path("", include('dashboard.urls')),
 ]
 
 if settings.DEBUG:

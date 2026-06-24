@@ -4,6 +4,12 @@ function createProductCard(product) {
     if (!product.image) {
       product.image = '/media/products_image/default.png'
     }
+    const desc = product.description
+    if (desc.length >= 30) {
+      product.description = desc.slice(0, 30) + '...';
+      console.log(product.description)
+    }
+
     div.innerHTML = `
           <img class='product-image square' src='${product.image}'>
           <h2 class='product-name text'>${product.name}</h2>
@@ -35,7 +41,7 @@ function getData(element) {
 }
 
 function createItemOrderedItems(id, name, price) {
-  if (name.length > 16) {
+  if (name.length >= 16) {
     name = name.slice(0, 13) + '...';
   } 
   return `

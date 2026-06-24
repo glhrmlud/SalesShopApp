@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.db.models import Sum, Count
 from sales.models import Sale, ItemSale
 from products.models import Products
+from django.contrib.auth.decorators import login_required
 
 
-
+@login_required
 def dashboard(request):
-
     # Produto mais vendido
     top_products = (
         ItemSale.objects

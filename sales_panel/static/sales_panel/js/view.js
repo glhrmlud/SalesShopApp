@@ -1,6 +1,9 @@
 function createProductCard(product) {
     const div = document.createElement('div');
     div.classList = 'product-card square card blur'
+    if (!product.image) {
+      product.image = '/media/products_image/default.png'
+    }
     div.innerHTML = `
           <img class='product-image square' src='${product.image}'>
           <h2 class='product-name text'>${product.name}</h2>
